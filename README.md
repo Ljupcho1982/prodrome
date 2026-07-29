@@ -157,6 +157,11 @@ Vanilla HTML/CSS/JS + Web Audio API for capture, Meyda (or hand-rolled WASM DSP)
 
 The MVP is built, signed, tested, and published as a public GitHub Release.
 
+### 📲 Scan to install
+<img src="promo/qr-download-card.png" width="280" alt="Scan to install Prodrome">
+
+**▶️ Promo video:** [`promo/Prodrome-promo.mp4`](promo/Prodrome-promo.mp4) (26s, vertical) · **Social copy:** [`promo/social-posts.md`](promo/social-posts.md)
+
 ### What's implemented
 - ⚠️ **One-tap episode tag** (label + severity)
 - 🎙️ **10-sec voice note** → on-device pitch / speech-rate / pause extraction (Web Audio, audio discarded immediately)

@@ -11,3 +11,9 @@ android/keystore.properties
 
 # APKs are distributed as GitHub Release assets, not committed
 *.apk
+
+# promo working files
+promo/frames/
+promo/stills/
+promo/_qr_tmp.png
+promo/__pycache__/
