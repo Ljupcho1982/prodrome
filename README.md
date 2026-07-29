@@ -149,9 +149,13 @@ Vanilla HTML/CSS/JS + Web Audio API for capture, Meyda (or hand-rolled WASM DSP)
 
 ---
 
-## STATUS: v1.0 shipped ✅ (built & tested 2026-07-29)
+## STATUS: v1.0 PUBLIC ✅ (built, tested & released 2026-07-29)
 
-The MVP is built and packaged. `Prodrome-debug.apk` (4.4 MB) is in this folder.
+**⬇️ Download:** https://github.com/Ljupcho1982/prodrome/releases/latest — grab `Prodrome-1.0.apk` (signed, 3.4 MB), open on Android, allow "install unknown apps", tap.
+
+`SHA-256: 0628e12cc9b6906f4ff090de709cc44ec0333aa52cb38f1790f2f8568876a767`
+
+The MVP is built, signed, tested, and published as a public GitHub Release.
 
 ### What's implemented
 - ⚠️ **One-tap episode tag** (label + severity)
