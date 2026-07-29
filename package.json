@@ -1,0 +1,29 @@
+{
+  "name": "prodrome",
+  "version": "1.0.0",
+  "description": "Prodrome — a flight recorder for your body. Tag an episode after it starts; it rewinds your passive on-device signals to find your personal early-warning signs. 100% offline, no account.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --test",
+    "stress": "node tests/stress.js"
+  },
+  "keywords": [
+    "health",
+    "prodrome",
+    "digital-phenotyping",
+    "offline",
+    "privacy",
+    "pwa"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@capacitor/android": "^8.4.2",
+    "@capacitor/cli": "^8.4.2",
+    "@capacitor/core": "^8.4.2"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^3.0.5"
+  }
+}

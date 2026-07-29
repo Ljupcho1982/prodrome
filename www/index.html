@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b1020" />
+  <title>Prodrome</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="logo">⏪</span> Prodrome</div>
+    <div class="tagline">a flight recorder for your body</div>
+  </header>
+
+  <main id="app">
+    <!-- HOME -->
+    <section class="screen" data-screen="home">
+      <div id="headsup" class="card headsup"></div>
+
+      <button id="tagNow" class="bigbtn danger">
+        <span class="big">⚠️ Now</span>
+        <span class="sub">Something's wrong — tag it. I'll rewind the tape.</span>
+      </button>
+
+      <div class="card">
+        <div class="card-h">🎙️ Daily voice note <span class="hint">~10 seconds</span></div>
+        <p class="muted">Just say how you feel today. Only pitch, pace &amp; pauses are kept — the audio never leaves this phone and is discarded immediately.</p>
+        <div class="vrow">
+          <button id="recBtn" class="btn primary">Record 10s</button>
+          <div id="vmeter" class="meter"><div id="vmeterFill"></div></div>
+        </div>
+        <div id="vresult" class="muted small"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-h">➕ Log a signal <span class="hint">manual / from your watch</span></div>
+        <div class="grid2">
+          <label>Resting HR (bpm)<input id="inHr" type="number" inputmode="numeric" placeholder="e.g. 62" /></label>
+          <label>Sleep (hours)<input id="inSleep" type="number" step="0.1" inputmode="decimal" placeholder="e.g. 6.5" /></label>
+        </div>
+        <button id="saveSignals" class="btn">Save today's signals</button>
+      </div>
+    </section>
+
+    <!-- REWIND / EVENTS -->
+    <section class="screen hidden" data-screen="rewind">
+      <h2>Your episodes</h2>
+      <p class="muted small">Tap an episode to rewind the 24&nbsp;hours before it and see what drifted from <em>your</em> normal.</p>
+      <div id="eventList" class="list"></div>
+      <div id="rewindView"></div>
+    </section>
+
+    <!-- FINGERPRINT -->
+    <section class="screen hidden" data-screen="fingerprint">
+      <h2>Your early-warning fingerprint</h2>
+      <p class="muted small">Built from your tagged episodes. Higher bars = signs that show up most consistently before you feel bad. This is observation, not prediction.</p>
+      <div id="fpFilter"></div>
+      <div id="fpView"></div>
+    </section>
+
+    <!-- DOCTOR / SETTINGS -->
+    <section class="screen hidden" data-screen="more">
+      <h2>Report &amp; data</h2>
+      <div class="card">
+        <div class="card-h">🩺 Doctor one-pager</div>
+        <p class="muted small">A clean summary of your episodes and what preceded each — the thing that's impossible to produce in a 12-minute appointment.</p>
+        <button id="doctorBtn" class="btn primary">Open printable report</button>
+      </div>
+      <div class="card">
+        <div class="card-h">💾 Your data stays yours</div>
+        <p class="muted small">Everything is on this device. Back it up or move it as a JSON file.</p>
+        <div class="vrow">
+          <button id="exportBtn" class="btn">Export backup</button>
+          <button id="importBtn" class="btn">Import backup</button>
+          <input id="importFile" type="file" accept="application/json" hidden />
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-h">🧪 Try it now</div>
+        <p class="muted small">Load 6 weeks of realistic demo data (with a planted prodrome) so you can see the rewind &amp; fingerprint immediately.</p>
+        <div class="vrow">
+          <button id="demoBtn" class="btn">Load demo data</button>
+          <button id="wipeBtn" class="btn ghost">Erase everything</button>
+        </div>
+      </div>
+      <p class="muted small center">Prodrome is a self-knowledge tool, not a medical device. It shows what changed before the episodes you tagged — it does not diagnose or predict disease.</p>
+    </section>
+  </main>
+
+  <nav class="tabs">
+    <button class="tab active" data-go="home">🏠<span>Home</span></button>
+    <button class="tab" data-go="rewind">⏪<span>Rewind</span></button>
+    <button class="tab" data-go="fingerprint">🫆<span>Signs</span></button>
+    <button class="tab" data-go="more">🩺<span>Report</span></button>
+  </nav>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="js/core.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/voice.js"></script>
+  <script src="js/demo.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+    }
+  </script>
+</body>
+</html>

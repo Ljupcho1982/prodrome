@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Prodrome</string>
+    <string name="title_activity_main">Prodrome</string>
+    <string name="package_name">mk.semov.prodrome</string>
+    <string name="custom_url_scheme">mk.semov.prodrome</string>
+</resources>

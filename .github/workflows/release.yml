@@ -1,0 +1,45 @@
+# Build a signed Prodrome APK and attach it to a GitHub Release on every tag push.
+#
+# One-time setup (repo Settings → Secrets and variables → Actions):
+#   KEYSTORE_BASE64   = base64 of prodrome-release.keystore
+#                       (PowerShell: [Convert]::ToBase64String([IO.File]::ReadAllBytes("prodrome-release.keystore")) )
+#   KEYSTORE_PASSWORD = your store password
+#   KEY_ALIAS         = prodrome
+#   KEY_PASSWORD      = your key password
+#
+# Then:  git tag v1.0 && git push origin v1.0
+name: release
+on:
+  push:
+    tags: ['v*']
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+      - uses: actions/setup-java@v4
+        with: { distribution: 'temurin', java-version: '21' }
+      - uses: android-actions/setup-android@v3
+      - name: Install deps
+        run: npm ci || npm install
+      - name: Run tests
+        run: npm test
+      - name: Restore keystore
+        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > prodrome-release.keystore
+      - name: Write keystore.properties
+        run: |
+          printf 'storeFile=../prodrome-release.keystore\nstorePassword=%s\nkeyAlias=%s\nkeyPassword=%s\n' \
+            "${{ secrets.KEYSTORE_PASSWORD }}" "${{ secrets.KEY_ALIAS }}" "${{ secrets.KEY_PASSWORD }}" > android/keystore.properties
+      - name: Sync + build
+        run: |
+          npx cap sync android
+          cd android && ./gradlew assembleRelease
+      - name: Rename
+        run: cp android/app/build/outputs/apk/release/app-release.apk Prodrome-${{ github.ref_name }}.apk
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: Prodrome-*.apk
+          body_path: RELEASE_NOTES.md

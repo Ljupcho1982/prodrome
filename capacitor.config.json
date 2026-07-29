@@ -1,0 +1,8 @@
+{
+  "appId": "mk.semov.prodrome",
+  "appName": "Prodrome",
+  "webDir": "www",
+  "android": {
+    "backgroundColor": "#0b1020"
+  }
+}
